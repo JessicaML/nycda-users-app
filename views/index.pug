@@ -1,0 +1,18 @@
+html
+  head
+    link(rel="stylesheet" href="/css/bootstrap.min.css")
+  body
+    include navbar
+    hr
+    hr
+    hr
+    hr
+    .container
+      h1 Users
+      .row
+        each displayUser in displayUsers
+          .col-xs-3
+            h3= displayUsers
+            h3= displayUsers.lastname
+            h2= displayUsers.firstname
+            p= displayUsers.email
