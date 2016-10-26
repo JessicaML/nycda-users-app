@@ -3,13 +3,16 @@ html
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
   body
     include navbar.pug
-
+    hr
+    hr
+    hr
+    hr
     .container
       .row
         .col-xs-6.col-xs-offset-3
-          h1 You cand send me an email below:
+          h1 Add a user below:
 
-          form(action="/send-email" method="POST")
+          form(action="/add-user" method="POST")
             .form-group
               label(for="firstname") Full Name
               input(name="firstname" type="text" id="firstname" class="form-control" placeholder="Joanna")

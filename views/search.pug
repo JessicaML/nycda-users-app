@@ -1,0 +1,27 @@
+html
+  head
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
+  body
+    include navbar.pug
+    hr
+    hr
+    hr
+    hr
+
+    .container
+      .row
+        .col-xs-6.col-xs-offset-3
+          h1 Search for a user:
+
+          form(action="/search-input" method="POST")
+            .form-group
+              label(for="search-first-name") Search
+              input(name="searchFName" type="text" id="searchFName" class="form-control" placeholder="Joanna")
+            .form-group
+              label(for="search-last-name") Full Name
+              input(name="searchLName" type="text" id="searchLName" class="form-control" placeholder="Newton")
+            .form-group
+              label(for="search-email") Email address
+              input(name="searchEmail" type="text" id="searchEmail" class="form-control" placeholder="joannanewton@yahoo.com")
+
+            button(class="btn btn-success btn-lg btn-block") Submit
