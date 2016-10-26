@@ -6,13 +6,12 @@ html
     hr
     hr
     hr
-    hr
+    //- hr //margin css instead of hr
     .container
       h1 Users
       .row
-        each displayUser in displayUsers
+        each user in users
           .col-xs-3
-            h3= displayUsers
-            h3= displayUsers.lastname
-            h2= displayUsers.firstname
-            p= displayUsers.email
+            h2= user.lastname
+            h3= user.firstname
+            p= user.email
