@@ -10,6 +10,7 @@ var displayUsers = JSON.parse(fs.readFileSync("users.json"));
 var searchResults = [];
 
 function findUser(query) {
+	searchResults = [];
 	for (var i = 0; i < displayUsers.length; i++) {
 		if (searchFirstName(query, displayUsers[i]) || searchLastName(query, displayUsers[i])) {
 			searchResults.push(displayUsers[i]);
