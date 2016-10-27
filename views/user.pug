@@ -1,16 +1,17 @@
 html
-	head
-		link(rel="stylesheet" href="/css/bootstrap.min.css")
-	body
-		include navbar
-		hr
-		hr
-		hr
-		hr
-
-		.container
-			.row
-				.col-xs-4
-					h2= user.lastname
-					h3= user.firstname
-					p= user.email
+  head
+    link(rel="stylesheet" href="/css/bootstrap.min.css")
+  body
+    include navbar
+    hr
+    hr
+    hr
+    //- hr //margin css instead of hr
+    .container
+      h1 Search results
+      .row
+        each user in users
+          .col-xs-3
+            h2= user.lastname
+            h3= user.firstname
+            p= user.email

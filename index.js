@@ -7,14 +7,28 @@ var fs = require('fs');
 
 var displayUsers = JSON.parse(fs.readFileSync("users.json"));
 
+var searchResults = [];
+
 function findUser(query) {
 	for (var i = 0; i < displayUsers.length; i++) {
-		if (displayUsers[i].firstname.match(query)) {
-			return displayUsers[i];
-		} else if(displayUsers[i].lastname.match(query))  {
-			return displayUsers[i];
+		if (searchFirstName(query, displayUsers[i]) || searchLastName(query, displayUsers[i])) {
+			searchResults.push(displayUsers[i]);
+      return searchResults;
+		} else if(displayUsers[i].lastname.includes(query))  {
+			searchResults.push(displayUsers[i]);
+      return searchResults;
 		}
 	}
+
+	console.log(searchResults);
+}
+
+function searchFirstName(query, user) {
+	return user.firstname.toLowerCase().includes(query.toLowerCase());
+}
+
+function searchLastName(query, user) {
+	return user.lastname.toLowerCase().includes(query.toLowerCase());
 }
 
 function addUser(firstname, lastname, emailAddress) {
@@ -23,16 +37,8 @@ function addUser(firstname, lastname, emailAddress) {
 		"lastname": lastname,
 		"email": emailAddress,
 	};
-	//assign values to the object
-	console.log(newUser);
-	console.log(firstname);
-	console.log(lastname);
-	console.log(emailAddress);
-	//create an object from form input
-	//push new user  to JSON file
 
 	displayUsers.push(newUser);
-	console.log(displayUsers);
 
 	jsonUsers = JSON.stringify(displayUsers);
 
@@ -65,27 +71,20 @@ app.post('/search', function(req, res){
 });
 
 app.get('/search/*', function(req, res) {
-	var foundUser = findUser(req.params[0]);
-	if (foundUser === undefined) {
+	findUser(req.params[0]);
+	if (searchResults.length === 0) {
 		res.send(pug.renderFile('views/not-found.pug'));
 
 	} else {
-		res.send(pug.renderFile('views/user.pug', { user: foundUser }));
+		res.send(pug.renderFile('views/user.pug', { users: searchResults }));
 	}
 
 });
-
 
 app.get('/add-user', function(req, res) {
 	res.send(pug.renderFile('views/add-user.pug'));
 });
 
-
-
-// app.post('/add-user', function(req, res){
-//    console.log('post request on search page');
-//    res.redirect('/add-user/' + req.body.firstname + req.body.lastname + req.body.emailAddress);
-// });
 
 app.post('/add-user', function(req, res){
   console.log('adding users...');
