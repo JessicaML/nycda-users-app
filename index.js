@@ -6,12 +6,15 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 
 var displayUsers = JSON.parse(fs.readFileSync("users.json"));
+var foundUser;
 
 function findUser(query) {
 	for (var i = 0; i < displayUsers.length; i++) {
 		if (displayUsers[i].firstname === query) {
-			var foundUser = displayUsers[i];
+			foundUser = displayUsers[i];
 			return displayUsers[i];
+		} else {
+			foundUser = "user not found.";
 		}
 	}
 }
@@ -39,8 +42,12 @@ app.post('/search', function(req, res){
 
 app.get('/search/*', function(req, res) {
 	var foundUser = findUser(req.params[0]);
-	res.send(pug.renderFile('views/user.pug', { users: foundUser }));
-	// res.send('search a user with the query: ' + req.params[0]);
+	if (foundUser === undefined) {
+		res.send(pug.renderFile('views/not-found.pug'));
+
+	} else {
+		res.send(pug.renderFile('views/user.pug', { user: foundUser }));
+	}
 	console.log(foundUser);
 
 });
