@@ -13,14 +13,13 @@ function findUser(query) {
 	for (var i = 0; i < displayUsers.length; i++) {
 		if (searchFirstName(query, displayUsers[i]) || searchLastName(query, displayUsers[i])) {
 			searchResults.push(displayUsers[i]);
-      return searchResults;
 		} else if(displayUsers[i].lastname.includes(query))  {
 			searchResults.push(displayUsers[i]);
-      return searchResults;
 		}
 	}
 
 	console.log(searchResults);
+	return searchResults;
 }
 
 function searchFirstName(query, user) {
