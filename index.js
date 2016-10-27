@@ -9,17 +9,13 @@ var displayUsers = JSON.parse(fs.readFileSync("users.json"));
 
 var searchResults = [];
 
-function findUser(query) {
+function findUsers(query) {
 	searchResults = [];
 	for (var i = 0; i < displayUsers.length; i++) {
 		if (searchFirstName(query, displayUsers[i]) || searchLastName(query, displayUsers[i])) {
 			searchResults.push(displayUsers[i]);
-		} else if(displayUsers[i].lastname.includes(query))  {
-			searchResults.push(displayUsers[i]);
 		}
 	}
-
-	console.log(searchResults);
 	return searchResults;
 }
 
@@ -71,27 +67,23 @@ app.post('/search', function(req, res){
 });
 
 app.get('/search/*', function(req, res) {
-	findUser(req.params[0]);
+	findUsers(req.params[0]);
 	if (searchResults.length === 0) {
 		res.send(pug.renderFile('views/not-found.pug'));
-
 	} else {
 		res.send(pug.renderFile('views/user.pug', { users: searchResults }));
 	}
-
 });
 
 app.get('/add-user', function(req, res) {
 	res.send(pug.renderFile('views/add-user.pug'));
 });
 
-
 app.post('/add-user', function(req, res){
   console.log('adding users...');
 	res.redirect('/users');
 	addUser(req.body.firstname, req.body.lastname, req.body.emailAddress);
 });
-
 
 app.listen(3001, function() {
  console.log('Web server started on port 3001');
