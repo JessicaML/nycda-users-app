@@ -13,15 +13,10 @@ html
         .col-xs-6.col-xs-offset-3
           h1 Search for a user:
 
-          form(action="/search-input" method="POST")
+          form(action="/search" method="POST")
             .form-group
-              label(for="search-first-name") Search
-              input(name="searchFName" type="text" id="searchFName" class="form-control" placeholder="Joanna")
-            .form-group
-              label(for="search-last-name") Full Name
-              input(name="searchLName" type="text" id="searchLName" class="form-control" placeholder="Newton")
-            .form-group
-              label(for="search-email") Email address
-              input(name="searchEmail" type="text" id="searchEmail" class="form-control" placeholder="joannanewton@yahoo.com")
+              label(for="search") Search
+              input(name="query" type="text" id="query" class="form-control" placeholder="Joanna")
 
             button(class="btn btn-success btn-lg btn-block") Submit
+            p= displayUsers
