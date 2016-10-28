@@ -82,7 +82,26 @@ app.get('/add-user', function(req, res) {
 app.post('/add-user', function(req, res){
   console.log('adding users...');
 	res.redirect('/users');
+
 	addUser(req.body.firstname, req.body.lastname, req.body.emailAddress);
+
+	function addUser(firstname, lastname, emailAddress) {
+		newUser = {
+			"firstname": firstname,
+			"lastname": lastname,
+			"email": emailAddress,
+		};
+
+		displayUsers.push(newUser);
+
+		jsonUsers = JSON.stringify(displayUsers);
+
+		fs.writeFile('users.json', jsonUsers, function (err) {
+		if (err) throw err;
+		console.log('It\'s saved!');
+		});
+
+	}
 });
 
 app.listen(3001, function() {
