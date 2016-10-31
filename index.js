@@ -1,107 +1,35 @@
-var express = require('express');
-var pug = require('pug');
+const express = require('express'),
+			pug = require('pug');
+			morgan = require('morgan');
+			bodyParser = require('body-parser');
+			fs = require('fs');
+
+const userRoutes = require('./routes/users'),
+			searchRoutes = require('./routes/search'),
+			resultRoutes = require('./routes/search'),
+			addRoutes = require('./routes/add-user');
+
 var app = express();
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
-var fs = require('fs');
+		displayUsers = require('./user-store');
 
-var displayUsers = JSON.parse(fs.readFileSync("users.json"));
+app.set('view engine', 'pug');
 
-var searchResults = [];
-
-function findUsers(query) {
-	searchResults = [];
-	for (var i = 0; i < displayUsers.length; i++) {
-		if (searchFirstName(query, displayUsers[i]) || searchLastName(query, displayUsers[i])) {
-			searchResults.push(displayUsers[i]);
-		}
-	}
-	return searchResults;
-}
-
-function searchFirstName(query, user) {
-	return user.firstname.toLowerCase().includes(query.toLowerCase());
-}
-
-function searchLastName(query, user) {
-	return user.lastname.toLowerCase().includes(query.toLowerCase());
-}
-
-function addUser(firstname, lastname, emailAddress) {
-	newUser = {
-		"firstname": firstname,
-		"lastname": lastname,
-		"email": emailAddress,
-	};
-
-	displayUsers.push(newUser);
-
-	jsonUsers = JSON.stringify(displayUsers);
-
-	fs.writeFile('users.json', jsonUsers, function (err) {
-	if (err) throw err;
-	console.log('It\'s saved!');
-	});
-
-}
-
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 
-app.get('/', function(request, response) {
-	response.redirect('/users');
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use('/users', userRoutes);
+
+app.use('/search', searchRoutes);
+
+app.use('/add-user', addRoutes);
+
+app.get('/', (request, response) => {
+	response.render('users/index', { users: displayUsers.getUsers() });
 });
 
-app.get('/users', function(req, res) {
-	res.send(pug.renderFile('views/index.pug', { users: displayUsers }));
-});
-
-app.get('/search', function(req, res) {
-	res.send(pug.renderFile('views/search.pug'));
-});
-
-app.post('/search', function(req, res){
-   console.log('post request on search page');
-   res.redirect('/search/' + req.body.query);
-});
-
-app.get('/search/*', function(req, res) {
-	findUsers(req.params[0]);
-	if (searchResults.length === 0) {
-		res.send(pug.renderFile('views/not-found.pug'));
-	} else {
-		res.send(pug.renderFile('views/user.pug', { users: searchResults }));
-	}
-});
-
-app.get('/add-user', function(req, res) {
-	res.send(pug.renderFile('views/add-user.pug'));
-});
-
-app.post('/add-user', function(req, res){
-  console.log('adding users...');
-	res.redirect('/users');
-
-	addUser(req.body.firstname, req.body.lastname, req.body.emailAddress);
-
-	function addUser(firstname, lastname, emailAddress) {
-		newUser = {
-			"firstname": firstname,
-			"lastname": lastname,
-			"email": emailAddress,
-		};
-
-		displayUsers.push(newUser);
-
-		jsonUsers = JSON.stringify(displayUsers);
-
-		fs.writeFile('users.json', jsonUsers, function (err) {
-		if (err) throw err;
-		console.log('It\'s saved!');
-		});
-
-	}
+app.get('/user', (request, response) => {
+	response.render('search/user', { users: displayUsers.getUsers() });
 });
 
 app.listen(3001, function() {
