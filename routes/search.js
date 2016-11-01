@@ -9,9 +9,9 @@ router.get('/', (request, response) => {
 });
 
 
-router.post('/', function(request, respone){
-   console.log(request.body.query);
-   response.redirect('/search/' + request.body.query);
+router.post('/', function(req, res){
+   console.log(req.body.query);
+   res.redirect('/search/' + req.body.query);
 });
 
 
