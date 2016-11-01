@@ -10,7 +10,7 @@ module.exports = {
     var results = [];
 
     for (var i = 0; i <users.length; i++) {
-      if (searchFName(query, users[i]) || searchLName(query, users[i])) {
+      if (searchFirstName(query, users[i]) || searchLastName(query, users[i])) {
         results.push(users[i]);
       }
     }
@@ -29,7 +29,7 @@ module.exports = {
 };
 
 function searchFirstName(input, user) {
-  return user.firstname.toLowercase().includes(input.toLowerCase());
+  return user.firstname.toLowerCase().includes(input.toLowerCase());
 }
 
 function searchLastName(input, user) {

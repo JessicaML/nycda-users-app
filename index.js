@@ -28,8 +28,8 @@ app.get('/', (request, response) => {
 	response.render('users/index', { users: displayUsers.getUsers() });
 });
 
-app.get('/user', (request, response) => {
-	response.render('search/user', { users: displayUsers.getUsers() });
+app.get('/', (request, response) => {
+	response.render('search/user', { users: displayUsers.searchUsers() });
 });
 
 app.listen(3001, function() {

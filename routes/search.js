@@ -14,6 +14,12 @@ router.post('/', function(req, res){
    res.redirect('/search/' + req.body.query);
 });
 
+router.get('/:query', (request, response) => {
+  var results = displayUsers.searchUsers(request.params.query);
+
+  response.render('search/user', { results: results });
+});
+
 
 // router.get('/search/*', function(request, response) {
 //   var results = searchUsers(request.body.query);

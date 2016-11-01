@@ -9,8 +9,8 @@ html
     .container
       h1 Search results
       .row
-        //- each user in users
-        //-   .col-xs-3
-        //-     h2= user.lastname
-        //-     h3= user.firstname
-        //-     p= user.email
+        each result in results
+          .col-xs-3
+            h2= result.lastname
+            h3= result.firstname
+            p= result.email
