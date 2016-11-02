@@ -4,23 +4,28 @@ const express = require('express'),
 
 var displayUsers = require('./../user-store');
 
-router.get('/', (request, response) => {
-  response.render('search/search');
+// router.get('/', (request, response) => {
+//   response.render('search/search');
+// });
+
+// router.post('/', function(req, res){
+//    console.log(req.body.query);
+//    res.redirect('/search/' + req.body.query);
+// });
+//
+// router.get('/:query', (request, response) => {
+//   var results = displayUsers.searchUsers(request.params.query);
+//
+//   response.render('search/user', { results: results });
+// });
+
+router.get('/api/search/*', (req, res) => {
+  var results = userStore.searchUsers(reg.params[0]);
+  console.log(chalk.green('RESULTS ARE:'));
+  console.log(results);
+
+  res.json(results);
 });
-
-
-router.post('/', function(req, res){
-   console.log(req.body.query);
-   res.redirect('/search/' + req.body.query);
-});
-
-router.get('/:query', (request, response) => {
-  var results = displayUsers.searchUsers(request.params.query);
-
-  response.render('search/user', { results: results });
-});
-
-
 // router.get('/search/*', function(request, response) {
 //   var results = searchUsers(request.body.query);
 //   response.render('search/user', { results: searchUsers });

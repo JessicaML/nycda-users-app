@@ -1,16 +1,11 @@
-html
-  head
-  body(padding-top="70px")
-    include ../navbar
-    hr
-    hr
-    hr
-    hr
-    .container
-      h1 Search results
-      .row
-        each result in results
-          .col-xs-3
-            h2= result.lastname
-            h3= result.firstname
-            p= result.email
+extends ../layout.pug
+block content
+  include ../navbar
+  .container
+    h1 Search results
+    .row
+      each result in results
+        .col-xs-3
+          h2= result.lastname
+          h3= result.firstname
+          p= result.email

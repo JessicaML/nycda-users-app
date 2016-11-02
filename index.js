@@ -1,7 +1,8 @@
 const express = require('express'),
-			pug = require('pug');
-			morgan = require('morgan');
-			bodyParser = require('body-parser');
+			pug = require('pug'),
+			morgan = require('morgan'),
+			chalk = require('chalk'),
+			bodyParser = require('body-parser'),
 			fs = require('fs');
 
 const userRoutes = require('./routes/users'),
@@ -26,10 +27,6 @@ app.use('/add-user', addRoutes);
 
 app.get('/', (request, response) => {
 	response.render('users/index', { users: displayUsers.getUsers() });
-});
-
-app.get('/', (request, response) => {
-	response.render('search/user', { users: displayUsers.searchUsers() });
 });
 
 app.listen(3001, function() {
