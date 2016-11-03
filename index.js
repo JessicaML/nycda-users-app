@@ -32,6 +32,8 @@ app.get('/', (request, response) => {
 	response.render('search/user', { users: displayUsers.searchUsers() });
 });
 
+
+
 app.listen(3001, function() {
  console.log('Web server started on port 3001');
 });

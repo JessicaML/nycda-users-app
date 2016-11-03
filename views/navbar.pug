@@ -1,7 +1,7 @@
 html
   head
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous")
-  bodys
+  body
     nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
       .container
         .navbar-header
@@ -13,11 +13,7 @@ html
           a.navbar-brand(href='/') Home
           a.navbar-brand(href='/search/') Search
           a.navbar-brand(href='/add-user/') Add user
+          button(type="button" class="btn btn-success jl-like-button") Like this app
 
-        //-
-        //- #bs-example-navbar-collapse-1.collapse.navbar-collapse
-        //-   ul.nav.navbar-nav
-        //-     li
-        //-       a(href='/search/') Search
-        //-     li
-        //-       a(href='/add-user/') Add user
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+    script(src="/../application.js")

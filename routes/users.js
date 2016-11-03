@@ -8,7 +8,4 @@ router.get('/', (request, response) => {
   response.render('users/index');
 });
 
-
-
-
 module.exports = router;
