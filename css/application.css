@@ -1,4 +1,12 @@
-.search-button {
+
+a {
+  color: red;
+  }
+
+h2 {
+  color: red;
+}
+  .search-button {
     margin-bottom: 0px;
 }
 

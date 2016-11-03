@@ -29,6 +29,14 @@ app.get('/', (request, response) => {
 	response.render('users/index', { users: displayUsers.getUsers() });
 });
 
+app.get('/api/search/*', (req, res) => {
+  var results = displayUsers.searchUsers(req.params[0]);
+  console.log(chalk.green('RESULTS ARE:'));
+  console.log(results);
+
+  res.json(results);
+});
+
 app.listen(3001, function() {
  console.log('Web server started on port 3001');
 });
