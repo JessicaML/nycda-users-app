@@ -1,16 +1,8 @@
-
-a {
-  color: red;
-  }
-
-h2 {
-  color: red;
-}
-  .search-button {
+#search-button {
     margin-bottom: 0px;
 }
 
-.search-button .form-control {
+#search-button .form-control {
   width: 400px;
 }
 
