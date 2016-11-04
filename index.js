@@ -13,6 +13,8 @@ const userRoutes = require('./routes/users'),
 var app = express();
 		displayUsers = require('./user-store');
 
+app.use(express.static('public'));
+
 app.set('view engine', 'pug');
 
 app.use(morgan('dev'));
@@ -32,7 +34,7 @@ app.get('/', (request, response) => {
 app.get('/api/search/*', (req, res) => {
   var results = displayUsers.searchUsers(req.params[0]);
   console.log(chalk.green('RESULTS ARE:'));
-  console.log(results);
+	console.log(req.params[0]);
 
   res.json(results);
 });

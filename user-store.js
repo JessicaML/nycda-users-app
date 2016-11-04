@@ -14,7 +14,7 @@ module.exports = {
         results.push(users[i]);
       }
     }
-
+    
     return results;
   },
   addUser: function(userObject) {

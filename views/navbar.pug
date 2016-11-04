@@ -1,9 +1,10 @@
 nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
   .container
     .navbar-header
-      form(class="form-inline float-xs-right" id="search-button")
-        input(class="form-control")
-        button(type="Submit" class="btn btn-info") Submit
       a.navbar-brand(href='/') Home
       a.navbar-brand(href='/add-user/') Add user
       button(type="button" class="btn btn-info") Like
+      form(class="form-inline float-xs-right" id="search-button")
+        input(class="form-control")
+        button(type="Submit" class="btn btn-info") Submit
+        ul.jl-app-search-results

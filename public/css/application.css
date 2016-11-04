@@ -1,3 +1,4 @@
+
 #search-button {
     margin-bottom: 0px;
 }
@@ -6,14 +7,14 @@
   width: 400px;
 }
 
-.search-results {
+.jl-app-search-results {
   padding-left: 0;
   position: absolute;
   z-index: 99999;
   top: 47px;
 }
 
-.search-results li {
+.jl-app-search-results li {
   width: 400px;
   height: 50px;
   background: white;

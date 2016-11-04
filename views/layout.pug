@@ -1,23 +1,10 @@
 html
   head
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous")
-    link(rel="stylesheet" src="../css/application.css")
+    link(rel="stylesheet" href="/css/application.css")
   body(style='margin-top:100px')
     include navbar
     block content
 
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
-    script.
-      $('#search-button input').on('keyup', function() {
-        var query = $('#search-button').val();
-        console.log(query);
-        $.get('/api/search/' + query, function(data) {
-          console.log(data);
-          $(".search-results").html('');
-          data.forEach(function(element) {
-            $(".search-results").append(
-              $("<li>" + element.firstname + ' ' + element.lastname + '</li>')
-              );
-            });
-          });
-        });
+    script(src="/js/application.js")
